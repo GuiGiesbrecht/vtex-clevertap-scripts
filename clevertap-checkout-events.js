@@ -446,24 +446,17 @@ const ClevertapCheckoutEvents = (() => {
     const clevertapConfigs = getStorage("clevertapConfigs");
     console.log("Debug CleverTap configs from storage:", clevertapConfigs);
 
-    let config = null;
-
-    if (clevertapConfigs) {
-      try {
-        config = JSON.parse(clevertapConfigs);
-        console.log("Debug CleverTap config parsed successfully:", config);
-      } catch (e) {
-        console.error("CleverTap: failed to parse config from localStorage", e);
-      }
-    }
-
-    if (!config || !config.preferences || !config.preferences.trackEvents) {
+    if (
+      !clevertapConfigs ||
+      !clevertapConfigs.preferences ||
+      !clevertapConfigs.preferences.trackEvents
+    ) {
       console.error("CleverTap: no valid configuration found.");
 
       return false;
     }
 
-    const { trackEvents } = config.preferences;
+    const { trackEvents } = clevertapConfigs.preferences;
 
     return !!trackEvents[eventName];
   }
