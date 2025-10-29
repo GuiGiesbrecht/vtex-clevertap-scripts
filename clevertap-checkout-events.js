@@ -109,6 +109,7 @@ const ClevertapCheckoutEvents = (() => {
   };
 
   function sendEnhancedCheckoutEvents(e) {
+    console.log("Debug CleverTap: detected dataLayer event:", e);
     const ecommerceHandler = ecommerceEventHandlers[e.event];
     const defaultHandler = defaultEventHandlers[e.event];
 
