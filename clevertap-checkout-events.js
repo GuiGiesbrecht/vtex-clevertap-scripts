@@ -422,7 +422,9 @@ const ClevertapCheckoutEvents = (() => {
   const getStorage = (key) => {
     try {
       const value = localStorage.getItem(key);
+      console.log(`Debug Retrieved "${key}" from localStorage:`, value);
       if (!value) return null;
+      console.log(`Debug Parsed "${key}" from localStorage:`, JSON.parse(value));
       return JSON.parse(value);
     } catch (e) {
       console.error(`Error reading or parsing "${key}" from localStorage`, e);
@@ -441,12 +443,14 @@ const ClevertapCheckoutEvents = (() => {
 
   function verifyEvent(eventName) {
     const clevertapConfigs = getStorage("clevertapConfigs");
+    console.log("Debug CleverTap configs from storage:", clevertapConfigs);
 
     let config = null;
 
     if (clevertapConfigs) {
       try {
         config = JSON.parse(clevertapConfigs);
+        console.log("Debug CleverTap config parsed successfully:", config);
       } catch (e) {
         console.error("CleverTap: failed to parse config from localStorage", e);
       }
